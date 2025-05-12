@@ -107,6 +107,7 @@ def main():
 
     for _, b in bancos.iterrows():
         entidad = b.get("Entidad", b.bank_number)
+        id = b.get("ID", b.account_number)
         movs = descargar_extractos(
             token,
             account_number=b.account_number,
@@ -116,11 +117,11 @@ def main():
         df = estandarizar(movs)
 
         if df.empty:
-            print(f"{entidad}: 0 movimientos")
+            print(f"{id} - {entidad}: 0 movimientos")
             sin_mov.append(entidad)
         else:
-            print(f"{entidad}: {len(df)} movimientos — exportando…")
-            filename = f"{entidad} Movimientos - Fecha {fecha}.xlsx"
+            print(f"{id} - {entidad}: {len(df)} movimientos — exportando…")
+            filename = f"{id} - {entidad} Movimientos - Fecha {fecha}.xlsx"
             ruta = os.path.join(carpeta_mov, filename)
             df.to_excel(ruta, index=False, sheet_name="Movimientos")
             print(f"  ✔️  Guardado en «{ruta}»")
