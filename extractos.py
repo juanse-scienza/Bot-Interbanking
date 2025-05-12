@@ -120,8 +120,8 @@ def main():
             print(f"{id} - {entidad}: 0 movimientos")
             sin_mov.append(entidad)
         else:
-            print(f"{id} - {entidad}: {len(df)} movimientos — exportando…")
-            filename = f"{id} - {entidad} Movimientos - Fecha {fecha}.xlsx"
+            print(f"{id}_{entidad}: {len(df)} movimientos — exportando…")
+            filename = f"{id}_{entidad}_Movimientos_Fecha_{fecha}.xlsx"
             ruta = os.path.join(carpeta_mov, filename)
             df.to_excel(ruta, index=False, sheet_name="Movimientos")
             print(f"  ✔️  Guardado en «{ruta}»")
